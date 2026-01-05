@@ -10,18 +10,22 @@ const app = express();
 //   console.log(req.params)
 //   res.send({fistname: "Rahul",lastName:"Singh"})
 //  })
-// 
-const{adminAuth,userAuth}=require("./middleware/auth")
-app.use("/admin",adminAuth)
-app.get("/user",userAuth,(req,res)=>{
-  res.send("User data is called!")
-})
-app.get("/admin/userInfo",(req,res)=>{
-  res.send(" admin userID calledd the data")
-})
-app.get("/admin/deleteData",(req,res)=>{
-  res.send(" admin delete calledd the data")
-})
+//
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("something is wrong");
+  }
+});
+app.get("/getUserData", (req, res) => {
+  throw new Error("dfbslsf");
+  res.send("User data send");
+});
+app.use("/", (err, req, res, next) => {
+  if (err) {
+    res.status(500).send("something is wrong");
+  }
+});
+
 app.listen(7777, () => {
   console.log("Server is successfully listening on port 77777");
 });
