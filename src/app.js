@@ -37,6 +37,14 @@ app.post("/sigup", async (req, res) => {
   await user.save();
   res.send("user added successfully");
 });
+app.get("/feed", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (err) {
+    res.status(404).send("something went wrong");
+  }
+});
 connectDB()
   .then(() => {
     console.log("database connections established....");
