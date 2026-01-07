@@ -30,14 +30,10 @@ const User = require("./model/user");
 //   }
 // });/
 // hello
-
+app.use(express.json());
 app.post("/sigup", async (req, res) => {
-  const user = new User({
-    firstName: "Ruhi",
-    lastName: "Singh",
-    emailId: "rahul@gmail.com",
-    password: 1234,
-  });
+  // console.log(req.body);
+  const user = new User(req.body);
   await user.save();
   res.send("user added successfully");
 });
