@@ -45,6 +45,28 @@ app.get("/feed", async (req, res) => {
     res.status(404).send("something went wrong");
   }
 });
+app.delete("/user", async (req, res) => {
+  const userId = req.body.userId;
+
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    res.send("user deleted successfully");
+  } catch (err) {
+    res.status(404).send("something went wrong");
+  }
+});
+// this is for updating the data inside
+// patch apid
+app.patch("/user", async (req, res) => {
+  const userId = req.body.userId;
+  const data = req.body;
+  try {
+    await User.findByIdAndUpdate({ _id: userId }, data);
+    res.send("updated data successfully");
+  } catch (err) {
+    res.status(404).send("somethig went wrong");
+  }
+});
 connectDB()
   .then(() => {
     console.log("database connections established....");
