@@ -96,7 +96,7 @@ app.post("/signup", async (req, res) => {
     res.status(500).send("error saving the user " + err.message);
   }
 });
-
+//
 app.get("/user", async (req, res) => {
   try {
     const { email, username } = req.body;
