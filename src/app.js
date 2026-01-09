@@ -86,6 +86,28 @@ const{validateSignUpdata}=require("./utils/validation");
 const bcrypt=require("bcrypt");
 
 app.use(express.json());
+app.post("/login",async(req,res)=>{
+  try{
+  const{emailId,password}=req.body;
+  const user=await User.findOne({emailId:emailId});
+  if(!user){
+    throw new Error("Invalid Credential...");
+
+  }
+  const isPasswordValid=await bcrypt.compare(password,user.password);
+  if(isPasswordValid){
+    res.send("Login successfully!!!")
+  }
+  else{
+    throw new Error("Invalid Credential...");
+  }
+
+}
+catch (err) {
+    res.status(500).send("ERROR: " + err.message);
+
+  }
+});
 
 app.post("/signup", async (req, res) => {
   try{
