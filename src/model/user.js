@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const validator = require("validator");
+const jwt=require("jsonwebtoken");
 
 // Define the User schema
 // Added new validations and SchemaTypes
@@ -118,7 +119,11 @@ const userSchema = new Schema(
   },
   { timestamps: true }
 );
-
+userSchema.methods.getJWT=async function(){
+  const user=this;
+  const token=await jwt.sign({_id:user._id},"dev@tinder$790",{expiresIn:"7d",});
+    return token;
+}
 // Pre-save middleware to set `updatedAt`
 // userSchema.pre("save", function (next) {
 //   this.updatedAt = Date.now();
