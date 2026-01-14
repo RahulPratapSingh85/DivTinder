@@ -66,16 +66,16 @@ const userSchema = new Schema(
           "Password is not strong",
       },
     },
-    // avatar: {
-    //   type: String,
-    //   trim: true,
-    //   validate: {
-    //     validator: function (value) {
-    //       return validator.isURL(value);
-    //     },
-    //     message: "Give string is not an URL",
-    //   },
-    // },
+    avatar: {
+      type: String,
+      trim: true,
+      validate: {
+        validator: function (value) {
+          return validator.isURL(value);
+        },
+        message: "Give string is not an URL",
+      },
+    },
     about: {
       type: String,
       maxLength: [500, "Too many words"],
