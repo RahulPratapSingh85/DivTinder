@@ -104,7 +104,10 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum:{ 
+        values: ["male", "female","other"],
+        message:`{VALUE} is not a valid gender type`
+      }
     },
     role: {
       type: String,
